@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - The Furniture Boutique</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #b8860b;
+            --secondary-color: #1a1a1a;
+            --accent-color: #d4af37;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            padding-top: 70px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        /* Navigation - Updated */
+        .navbar {
+            background-color: var(--secondary-color) !important;
+            padding: 10px 0;
+            height: 70px;
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28184, 134, 11, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            width: 1.25em;
+            height: 1.25em;
+        }
+        
+        .icons {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .icons:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .contact-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .contact-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive navbar */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: var(--secondary-color);
+                padding: 20px;
+                margin-top: 10px;
+                border-radius: 5px;
+            }
+            
+            .navbar-nav {
+                align-items: flex-start;
+            }
+            
+            .nav-item {
+                margin-bottom: 10px;
+            }
+            
+            .contact-btn {
+                margin-top: 10px;
+            }
+        }
+        
+        .blog-post {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+        
+        .blog-image {
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-title {
+            color: var(--secondary-color);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+        
+        .blog-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .admin-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Admin Button */
+        .admin-access {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+        
+        .admin-access:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        /* Blog Header */
+        .blog-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 100px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .blog-header h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .blog-header p {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+        
+        /* Footer */
+        .footer-area {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 100%;
+        }
+        
+        .footer-area .section-space {
+            padding: 60px 0 30px;
+        }
+        
+        .footer {
+            padding: 60px 0 30px;
+        }
+        
+        .footer h5 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer h5:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .contact-footer a {
+            color: white;
+            text-decoration: none;
+            margin-bottom: 15px;
+        }
+        
+        .contact-footer a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-footer a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-footer a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .branches a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .branches a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Back to top button */
+        #return-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            display: block;
+            text-decoration: none;
+            border-radius: 50%;
+            display: none;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        #return-to-top i {
+            color: white;
+            margin: 0;
+            position: relative;
+            left: 16px;
+            top: 13px;
+            font-size: 1.2rem;
+        }
+        
+        #return-to-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Whatsapp button */
+        .Whatsupbuttn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        
+        .Whatsupbuttn img {
+            transition: all 0.3s ease;
+        }
+        
+        .Whatsupbuttn img:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Modal for full post */
+        .post-modal .modal-dialog {
+            max-width: 800px;
+        }
+        
+        .post-modal .modal-header {
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .post-modal .modal-body img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - Updated with hamburger menu -->
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="menu_top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="wp-content/TFBlogo-removebg-preview.png" alt="logo" style="height: 50px; width: auto; object-fit: contain;" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="products.html">Our Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="blog.html">Blog</a>
+        </li>
+
+        <!-- Existing Items -->
+        <li class="nav-item me-3">
+          <a href="tel:+917827650882" class="nav-link">
+            <i class="bi bi-telephone-outbound-fill icons"></i>
+          </a>
+        </li>
+        <li class="nav-item me-3">
+          <a target="_blank" href="https://www.facebook.com/tfblko" class="nav-link">
+            <i class="bi bi-facebook icons" style="color: #1877F2;"></i>
+          </a>
+        </li>
+        <li class="nav-item me-3">
+          <a target="_blank" href="https://www.instagram.com/thefurnitureboutiqueindia" class="nav-link">
+            <i class="bi bi-instagram icons" style="color: #E1306C;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://api.whatsapp.com/send?phone=917827650882" target="_blank" class="contact-btn" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+            WhatsApp Now
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header" id="blog-home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-12">
+                    <h1>Our Blog</h1>
+                    <p>Latest news, tips, and insights about furniture and home decor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="py-5">
+        <div class="container">
+            <div id="blog-posts" class="row">
+                <!-- Posts will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Access Button -->
+    <button class="admin-access" onclick="checkAdminAccess()" title="Admin Panel">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+      <div class="section-space">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="under-footer d-md-flex justify-content-between align-items-start text-center text-md-start">
+                <div class="mb-4 mb-md-0">
+                  <h5>Our Contact</h5>
+                  <div class="contact-footer mt-4">
+                    <a href="tel:+917827650882" class="d-block d-lg-inline-block mb-3 mb-lg-0 me-lg-4">
+                      <i class="bi bi-telephone-outbound-fill icons"></i>+917827650882 / 8076095958
+                    </a>
+                    <a href="http://www.thefurnitureboutique.in/" class="d-block d-lg-inline-block">
+                      <i class="fas fa-globe me-2"></i>www.thefurnitureboutique.in
+                    </a>
+                  </div>
+                  <div class="social-footer mt-4">
+                    <a href="tel:+917827650882" class="me-3">
+                      <i class="bi bi-telephone-outbound-fill fs-5"></i>
+                    </a>
+                    <a href="https://www.instagram.com/thefurnitureboutiqueindia" target="_blank" class="me-3">
+                <i class="bi bi-instagram icons" style="color: #E1306C;"></i>
+                    </a>
+                    <a href="https://www.facebook.com/tfblko" target="_blank">
+                         <i class="bi bi-facebook icons" style="color: #1877F2;"></i>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="branches">
+                  <h5>Main Branch</h5>
+                  <a href="https://g.co/kgs/k8X3DSa" target="_blank" class="mt-4 d-inline-block">
+ 6C/973, Sector 6, Gomti Nagar, Lucknow, Badhamau, Uttar Pradesh 226010</a>
+                </div>
+              </div>
+              
+              <div class="text-center mt-5 pt-3 border-top border-secondary">
+<p class="mb-0">
+  &copy; 2024 The Furniture Boutique. All Rights Reserved. | 
+  <a href="https://share.google/4Ox2tG3JQugpaUE4m" target="_blank" style="color: #007bff; text-decoration: none;">
+MA Tech Cloud Solution
+  </a>
+</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Whatsapp Button -->
+    <div class="Whatsupbuttn">
+      <a href="https://api.whatsapp.com/send?phone=917827650882" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" style="height: 60px;">
+      </a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div id="return-to-top"><i class="bi bi-arrow-up"></i></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load blog posts from localStorage
+        function loadBlogPosts() {
+            const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const blogContainer = document.getElementById('blog-posts');
+            
+            if (posts.length === 0) {
+                blogContainer.innerHTML = `
+                    <div class="col-12 text-center">
+                        <h3>No blog posts yet</h3>
+                        <p>Check back later for updates!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            blogContainer.innerHTML = posts.map((post, index) => `
+                <div class="col-lg-4 col-md-6 mb-4 fade-in">
+                    <div class="blog-post">
+                        <img src="${post.image || 'https://via.placeholder.com/400x250'}" alt="${post.title}" class="w-100 blog-image">
+                        <div class="blog-content">
+                            <h3 class="blog-title">${post.title}</h3>
+                            ${post.category ? `<small style="color: #b8860b; font-weight: 600;">📁 ${post.category}</small><br>` : ''}
+                            <div class="blog-meta">
+                                <i class="fas fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}
+                            </div>
+                            <p>${post.content.substring(0, 150)}...</p>
+                            <button class="btn btn-outline-primary btn-sm" onclick="viewPost(${index})">Read More</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Trigger animations
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+            }, 100);
+        }
+        
+        function viewPost(index) {
+            const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            
+            // Validate index
+            if (!posts[index]) {
+                alert('Post not found!');
+                return;
+            }
+            
+            const post = posts[index];
+            
+            // Convert markdown links to HTML: [text](url) -> <a href="url">text</a>
+            let htmlContent = post.content.replace(/\n/g, '<br>');
+            htmlContent = htmlContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #b8860b; text-decoration: underline;">$1</a>');
+            
+            // Build related posts HTML
+            let relatedHtml = '';
+            if (post.relatedLinks && post.relatedLinks.length > 0) {
+                const relatedPostsArray = post.relatedLinks
+                    .map(id => {
+                        const postIndex = parseInt(id);
+                        if (!isNaN(postIndex) && posts[postIndex]) {
+                            const relPost = posts[postIndex];
+                            return `<a href="#" onclick="event.preventDefault(); viewPost(${postIndex})" style="display: block; margin-bottom: 10px; color: #b8860b; text-decoration: none;"><strong>→ ${relPost.title}</strong></a>`;
+                        }
+                        return '';
+                    })
+                    .filter(html => html !== '')
+                    .join('');
+                
+                if (relatedPostsArray) {
+                    relatedHtml = `
+                        <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-left: 4px solid #b8860b;">
+                            <h6 style="color: #1a1a1a; margin-bottom: 15px;">📖 Further Reading:</h6>
+                            ${relatedPostsArray}
+                        </div>
+                    `;
+                }
+            }
+            
+            // Create modal HTML
+            const modalHtml = `
+                <div class="modal fade post-modal" id="postModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div>
+                                    <h5 class="modal-title">${post.title}</h5>
+                                    ${post.category ? `<small class="text-muted">📁 Category: ${post.category}</small>` : ''}
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${post.image ? `<img src="${post.image}" alt="${post.title}" class="img-fluid mb-3">` : ''}
+                                <div class="text-muted mb-3">
+                                    <i class="fas fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}
+                                </div>
+                                <div>${htmlContent}</div>
+                                ${relatedHtml}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('postModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Show modal
+            try {
+                const modal = new bootstrap.Modal(document.getElementById('postModal'));
+                modal.show();
+            } catch (error) {
+                console.error('Error showing modal:', error);
+                alert('Error displaying post. Please refresh and try again.');
+            }
+        }
+        
+        function checkAdminAccess() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') { // Simple password, you can change this
+                window.location.href = 'admin.html';
+            } else {
+                alert('Incorrect password!');
+            }
+        }
+        
+        // Back to top functionality
+        window.onscroll = function() {
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            const returnToTopButton = document.getElementById("return-to-top");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                returnToTopButton.style.display = "block";
+            } else {
+                returnToTopButton.style.display = "none";
+            }
+        };
+        
+        document.getElementById("return-to-top").addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Load posts on page load
+        loadBlogPosts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - The Furniture Boutique</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #b8860b;
+            --secondary-color: #1a1a1a;
+            --accent-color: #d4af37;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            padding-top: 70px;
+        }
+        
+        .navbar {
+            background-color: var(--secondary-color) !important;
+        }
+        
+        .admin-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .post-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="wp-content/TFBlogo-removebg-preview.png" alt="logo" style="height: 50px; width: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="admin.html">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Header -->
+    <section class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-4">Admin Panel</h1>
+                    <p class="lead">Manage your blog posts</p>
+                    <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Content -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Add New Post -->
+            <div class="admin-card fade-in">
+                <h3 class="mb-4">Add New Blog Post</h3>
+                <form id="postForm">
+                    <div class="mb-3">
+                        <label for="postTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="postTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postImage" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="postImage" accept="image/*">
+                        <div class="form-text">Select an image file for the blog post (optional)</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postContent" class="form-label">Content</label>
+                        <textarea class="form-control" id="postContent" rows="5" required placeholder="Write your post content here. Use [link text](url) for links"></textarea>
+                        <div class="form-text">Example: This is a [great furniture collection](https://example.com/furniture) for your home.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postCategory" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="postCategory" placeholder="e.g., Sofas, Beds, Dining, Tips">
+                    </div>
+                    <div class="mb-3">
+                        <label for="postLinks" class="form-label">Related Posts (IDs, comma-separated)</label>
+                        <input type="text" class="form-control" id="postLinks" placeholder="e.g., 0, 2, 3">
+                        <div class="form-text">List post index numbers to show as "Further Reading"</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Post</button>
+                </form>
+            </div>
+
+            <!-- Storage Management -->
+            <div class="admin-card fade-in" style="background-color: #fff3cd; border: 1px solid #ffc107;">
+                <h5 class="mb-3" style="color: #856404;">⚠️ Storage Management</h5>
+                <p style="color: #856404; margin-bottom: 15px;">If you see "Storage quota exceeded" errors, try these options:</p>
+                <button type="button" class="btn btn-warning me-2" onclick="deleteOldestPosts()">
+                    <i class="fas fa-trash"></i> Delete Oldest Posts (Keep 5)
+                </button>
+                <button type="button" class="btn btn-danger" onclick="clearAllData()">
+                    <i class="fas fa-trash-alt"></i> Clear All Data
+                </button>
+                <div class="form-text mt-2" style="color: #856404;">This will help free up localStorage space.</div>
+            </div>
+
+            <!-- Existing Posts -->
+            <div class="admin-card fade-in">
+                <h3 class="mb-4">Existing Posts</h3>
+                <div id="postsList">
+                    <!-- Posts will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Admin authentication
+        function checkAdminAuth() {
+            const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
+            if (!isAuthenticated) {
+                const password = prompt('Enter admin password:');
+                if (password === 'admin123') { // Change this password as needed
+                    sessionStorage.setItem('adminAuthenticated', 'true');
+                } else {
+                    alert('Incorrect password! Access denied.');
+                    window.location.href = 'blog.html';
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        // Check authentication on page load
+        if (!checkAdminAuth()) {
+            // Redirect handled in checkAdminAuth
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('adminAuthenticated');
+            window.location.href = 'blog.html';
+        }
+        
+        // Load existing posts
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const postsList = document.getElementById('postsList');
+            
+            if (posts.length === 0) {
+                postsList.innerHTML = '<p>No posts yet.</p>';
+                return;
+            }
+            
+            postsList.innerHTML = posts.map((post, index) => `
+                <div class="post-item">
+                    <div>
+                        <h5>${post.title}</h5>
+                        <small class="text-muted">${new Date(post.date).toLocaleDateString()}</small>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-danger me-2" onclick="deletePost(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="editPost(${index})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Add new post
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('postTitle').value.trim();
+            const content = document.getElementById('postContent').value.trim();
+            const category = document.getElementById('postCategory').value.trim() || 'General';
+            const links = document.getElementById('postLinks').value.trim() || '';
+            const imageFile = document.getElementById('postImage').files[0];
+            
+            // Validate required fields
+            if (!title || !content) {
+                alert('Please fill in Title and Content fields!');
+                return;
+            }
+            
+            if (imageFile) {
+                // Limit image file size to 2MB
+                if (imageFile.size > 2 * 1024 * 1024) {
+                    alert('Image is too large. Maximum size is 2MB.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onerror = function() {
+                    alert('Error reading image file. Please try again.');
+                    console.error('FileReader error:', reader.error);
+                };
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    savePost(title, imageData, content, category, links);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                savePost(title, null, content, category, links);
+            }
+        });
+        
+        function savePost(title, image, content, category, relatedLinks) {
+            try {
+                const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+                
+                // Parse and validate related links as integers
+                const parsedLinks = [];
+                if (relatedLinks && relatedLinks.trim()) {
+                    const linkArray = relatedLinks.split(',').map(x => x.trim());
+                    for (const link of linkArray) {
+                        const id = parseInt(link);
+                        if (!isNaN(id) && id >= 0 && id < posts.length) {
+                            parsedLinks.push(id);
+                        }
+                    }
+                }
+                
+                const newPost = {
+                    title: title.trim(),
+                    image: image,
+                    content: content.trim(),
+                    category: category.trim(),
+                    relatedLinks: parsedLinks,
+                    date: new Date().toISOString()
+                };
+                
+                posts.unshift(newPost);
+                
+                try {
+                    localStorage.setItem('blogPosts', JSON.stringify(posts));
+                } catch (e) {
+                    if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                        console.error('localStorage quota exceeded:', e);
+                        alert('Storage quota exceeded! Try:\n1. Removing the image\n2. Deleting old posts\n3. Clearing browser cache');
+                        posts.shift(); // Remove the post we just added
+                        return;
+                    }
+                    throw e;
+                }
+                
+                // Reset form
+                document.getElementById('postForm').reset();
+                
+                // Reload posts list
+                loadPosts();
+                
+                alert('✓ Blog post added successfully!');
+                
+                // Scroll to posts list
+                document.getElementById('postsList').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error saving post:', error);
+                console.error('Error details:', error.name, error.message);
+                alert('Error: Could not save post.\n\nDetails: ' + (error.message || 'Unknown error'));
+            }
+        }
+        
+        // Delete post
+        function deletePost(index) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+                posts.splice(index, 1);
+                localStorage.setItem('blogPosts', JSON.stringify(posts));
+                loadPosts();
+            }
+        }
+        
+        // Edit post (simple implementation)
+        function editPost(index) {
+            const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const post = posts[index];
+            
+            document.getElementById('postTitle').value = post.title;
+            document.getElementById('postContent').value = post.content;
+            document.getElementById('postCategory').value = post.category || '';
+            document.getElementById('postLinks').value = post.relatedLinks ? post.relatedLinks.join(', ') : '';
+            
+            // Remove the post and let user re-add it
+            posts.splice(index, 1);
+            localStorage.setItem('blogPosts', JSON.stringify(posts));
+            loadPosts();
+            
+            // Scroll to form
+            document.getElementById('postForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Delete oldest posts, keep only the 5 newest
+        function deleteOldestPosts() {
+            if (confirm('Delete oldest posts and keep only 5 newest? This frees up storage space.')) {
+                try {
+                    const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+                    
+                    if (posts.length > 5) {
+                        // Keep only 5 most recent posts
+                        const kept = posts.slice(0, 5);
+                        localStorage.setItem('blogPosts', JSON.stringify(kept));
+                        
+                        const deleted = posts.length - 5;
+                        alert(`✓ Deleted ${deleted} old posts.\nNow storing: ${5} posts.\nYou should now have space to add new posts!`);
+                        loadPosts();
+                    } else {
+                        alert('You have 5 or fewer posts already. Nothing to delete.');
+                    }
+                } catch (error) {
+                    console.error('Error deleting old posts:', error);
+                    alert('Error deleting old posts: ' + error.message);
+                }
+            }
+        }
+        
+        // Clear all posts from storage
+        function clearAllData() {
+            if (confirm('⚠️ DELETE ALL POSTS? This is irreversible!\n\nAre you absolutely sure?')) {
+                if (confirm('This is your LAST chance to cancel. Click OK to permanently delete everything.')) {
+                    try {
+                        localStorage.removeItem('blogPosts');
+                        document.getElementById('postForm').reset();
+                        loadPosts();
+                        alert('✓ All data cleared successfully!\nYour localStorage is now empty and ready for new posts.');
+                    } catch (error) {
+                        console.error('Error clearing data:', error);
+                        alert('Error clearing data: ' + error.message);
+                    }
+                }
+            }
+        }
+        
+        // Load posts on page load
+        loadPosts();
+        
+        // Trigger animations
+        setTimeout(() => {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        }, 100);
+    </script>
+</body>
+</html>

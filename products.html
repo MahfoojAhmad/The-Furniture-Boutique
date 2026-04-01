@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Furniture Boutique - Best furniture showroom in Lucknow</title>
+
+    <meta
+      name="description"
+      content="TFB Furniture Mart in Lucknow offers premium furniture at unbeatable prices. Explore our luxury sofas, dining sets, and bedroom furniture during our Season Off Sale."
+    />
+    <meta
+      name="keywords"
+      content="Best Furniture Store in Lucknow, Affordable Home Furniture Online, Luxury Sofas and Dining Sets"
+    />
+    <link rel="canonical" href="http://www.thefurnitureboutique.in/" />
+
+    <link rel="icon" href="wp-content/TFBlogo.jpg" sizes="32x32" />
+    <!-- bootstrap icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FAVICON LINK -->
+    <link
+      rel="shortcut icon"
+      href="wp-content/TFBlogo.jpg"
+      type="image/x-icon"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <!-- Custom CSS -->
+    <style>
+      :root {
+        --primary-color: #b8860b; /* Gold */
+        --secondary-color: #1a1a1a; /* Dark */
+        --accent-color: #d4af37; /* Metallic gold */
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --text-color: #333;
+        --text-light: #6c757d;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        color: var(--text-color);
+        overflow-x: hidden;
+        padding-top: 70px; /* Added to account for fixed navbar */
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+      }
+
+      /* Navigation - Updated */
+      .navbar {
+        background-color: var(--secondary-color) !important;
+        padding: 10px 0;
+        height: 70px; /* Reduced height */
+        transition: all 0.3s ease;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+      }
+
+      .navbar.scrolled {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand img {
+        height: 50px;
+        width: auto;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-toggler {
+        border: none;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .navbar-toggler:focus {
+        box-shadow: none;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28184, 134, 11, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        width: 1.25em;
+        height: 1.25em;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+      }
+
+      .icons {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .icons:hover {
+        color: var(--accent-color);
+        transform: scale(1.1);
+      }
+
+      .contact-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .contact-btn:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      /* Responsive navbar */
+      @media (max-width: 991.98px) {
+        .navbar-collapse {
+          background-color: var(--secondary-color);
+          padding: 20px;
+          margin-top: 10px;
+          border-radius: 5px;
+        }
+
+        .navbar-nav {
+          align-items: flex-start;
+        }
+
+        .nav-item {
+          margin-bottom: 10px;
+        }
+
+        .contact-btn {
+          margin-top: 10px;
+        }
+      }
+
+      /* Header - Adjusted for smaller navbar */
+      header {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 150px 0 100px;
+        position: relative;
+      }
+
+      .header-sub-head {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .header-static-bg h1 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+        margin-bottom: 25px;
+      }
+
+      .boxed-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .boxed-btn:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Sections */
+      .section-space {
+        padding: 80px 0;
+      }
+
+      .section-white-bg {
+        background-color: white;
+      }
+
+      .section-gray-bg {
+        background-color: #f8f9fa;
+      }
+
+      .section-head-group h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+        color: var(--secondary-color);
+      }
+
+      .section-head-group h2:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: var(--primary-color);
+        margin: 15px auto;
+      }
+
+      /* Product Boxes */
+      .product-boxes {
+        padding: 60px 0;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+        text-align: center;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      .product-card .content {
+        padding: 20px;
+      }
+
+      .product-card .title {
+        color: var(--primary-color);
+        font-weight: 600;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+
+      .product-card .btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .product-card .btn:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      /* Footer */
+      .footer-area {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      .footer {
+        padding: 60px 0 30px;
+      }
+
+      .footer h5 {
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer h5:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--primary-color);
+      }
+
+      .contact-footer a {
+        color: white;
+        text-decoration: none;
+        margin-bottom: 15px;
+      }
+
+      .contact-footer a:hover {
+        color: var(--primary-color);
+      }
+
+      .menu-icon {
+        margin-right: 10px;
+        color: var(--primary-color);
+      }
+
+      .social-footer a {
+        color: white;
+        font-size: 1.2rem;
+        margin-right: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .social-footer a:hover {
+        color: var(--primary-color);
+        transform: translateY(-3px);
+      }
+
+      .branches a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .branches a:hover {
+        color: var(--primary-color);
+      }
+
+      /* Back to top button */
+      #return-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        width: 50px;
+        height: 50px;
+        display: block;
+        text-decoration: none;
+        border-radius: 50%;
+        display: none;
+        z-index: 999;
+        transition: all 0.3s ease;
+      }
+
+      #return-to-top i {
+        color: white;
+        margin: 0;
+        position: relative;
+        left: 16px;
+        top: 13px;
+        font-size: 1.2rem;
+      }
+
+      #return-to-top:hover {
+        background: var(--accent-color);
+        transform: translateY(-5px);
+      }
+
+      /* Whatsapp button */
+      .Whatsupbuttn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 999;
+      }
+
+      .Whatsupbuttn img {
+        transition: all 0.3s ease;
+      }
+
+      .Whatsupbuttn img:hover {
+        transform: scale(1.1);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 992px) {
+        header {
+          padding: 130px 0 80px;
+        }
+
+        .header-static-bg h1 {
+          font-size: 2.2rem;
+        }
+
+        .section-space {
+          padding: 60px 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 110px 0 60px;
+          text-align: center;
+        }
+
+        .header-static-bg h1 {
+          font-size: 1.8rem;
+        }
+
+        .section-head-group h2 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        header {
+          padding: 100px 0 50px;
+        }
+
+        .header-static-bg h1 {
+          font-size: 1.5rem;
+        }
+
+        .boxed-btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        .section-space {
+          padding: 40px 0;
+        }
+
+        .section-head-group h2 {
+          font-size: 1.8rem;
+        }
+      }
+
+      .product-card-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .product-card-link:hover .product-card {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="menu_top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="wp-content/TFBlogo-removebg-preview.png"
+            alt="logo"
+            style="height: 50px; width: auto; object-fit: contain"
+          />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="products.html">Our Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+            <li class="nav-item me-3">
+              <a href="tel:+917827650882" class="nav-link">
+                <i class="bi bi-telephone-outbound-fill icons"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/tfblko"
+                class="nav-link"
+              >
+                <i class="bi bi-facebook icons" style="color: #1877f2"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3">
+              <a
+                target="_blank"
+                href="https://www.instagram.com/thefurnitureboutiqueindia"
+                class="nav-link"
+              >
+                <i class="bi bi-instagram icons" style="color: #e1306c"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://api.whatsapp.com/send?phone=917827650882"
+                target="_blank"
+                class="contact-btn"
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  text-decoration: none;
+                "
+              >
+                WhatsApp Now
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header-static-bg" id="home">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-8 col-sm-12 static-header">
+            <div class="home-static-bg">
+              <p class="header-sub-head">Summer Exclusive Deal</p>
+              <h1 class="mb-4">
+                Summer Season Premium Wedding Furniture Packages at Unbeatable
+                Prices!
+              </h1>
+              <div>
+                <a
+                  href="https://api.whatsapp.com/send?phone=917827650882"
+                  target="_blank"
+                  class="contact-btn"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    text-decoration: none;
+                  "
+                >
+                  WhatsApp Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Product Boxes Section -->
+    <section class="product-boxes section-white-bg">
+      <div class="container">
+        <div class="section-head-group">
+          <h2>Our Product Categories</h2>
+        </div>
+        <div class="row mt-5">
+          <!-- Sofa Box -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <a href="sofa.html" class="product-card-link">
+              <div class="product-card">
+                <img
+                  src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  alt="Sofa Collection"
+                />
+                <div class="content">
+                  <h3 class="title">SOFA COLLECTION</h3>
+                  <p>
+                    Explore our premium range of luxury sofas for your living
+                    room
+                  </p>
+                  <div class="btn">
+                    <i class="bi bi-whatsapp me-2"></i> Enquire Now
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Bed Box -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <a href="bed.html" class="product-card-link">
+              <div class="product-card">
+                <img
+                  src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  alt="Bed Collection"
+                />
+                <div class="content">
+                  <h3 class="title">BED COLLECTION</h3>
+                  <p>
+                    Discover our comfortable and stylish beds for your bedroom
+                  </p>
+                  <div class="btn">
+                    <i class="bi bi-whatsapp me-2"></i> Enquire Now
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Dining Box -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <a href="dining.html" class="product-card-link">
+              <div class="product-card">
+                <img
+                  src="https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  alt="Dining Collection"
+                />
+                <div class="content">
+                  <h3 class="title">DINING TABLE COLLECTION</h3>
+                  <p>Complete your dining space with our elegant dining sets</p>
+                  <div class="btn">
+                    <i class="bi bi-whatsapp me-2"></i> Enquire Now
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+      <div class="section-space">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                class="under-footer d-md-flex justify-content-between align-items-start text-center text-md-start"
+              >
+                <div class="mb-4 mb-md-0">
+                  <h5>Our Contact</h5>
+                  <div class="contact-footer mt-4">
+                    <a
+                      href="tel:+917827650882"
+                      class="d-block d-lg-inline-block mb-3 mb-lg-0 me-lg-4"
+                    >
+                      <i class="bi bi-telephone-outbound-fill icons"></i
+                      >+917827650882 / 8076095958
+                    </a>
+                    <a
+                      href="http://www.thefurnitureboutique.in/"
+                      class="d-block d-lg-inline-block"
+                    >
+                      <i class="fas fa-globe me-2"></i
+                      >www.thefurnitureboutique.in
+                    </a>
+                  </div>
+                  <div class="social-footer mt-4">
+                    <a href="tel:+917827650882" class="me-3">
+                      <i class="bi bi-telephone-outbound-fill fs-5"></i>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/thefurnitureboutiqueindia"
+                      target="_blank"
+                      class="me-3"
+                    >
+                      <i
+                        class="bi bi-instagram icons"
+                        style="color: #e1306c"
+                      ></i>
+                    </a>
+                    <a href="https://www.facebook.com/tfblko" target="_blank">
+                      <i
+                        class="bi bi-facebook icons"
+                        style="color: #1877f2"
+                      ></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="branches">
+                  <h5>Main Branch</h5>
+                  <a
+                    href="https://g.co/kgs/k8X3DSa"
+                    target="_blank"
+                    class="mt-4 d-inline-block"
+                  >
+                    1, near Mantri Awas, Vishesh Khand 3, Gomti Nagar, Lucknow,
+                    Uttar Pradesh 226010
+                  </a>
+                </div>
+              </div>
+
+              <div class="text-center mt-5 pt-3 border-top border-secondary">
+                <p class="mb-0">
+                  &copy; 2024 The Furniture Boutique. All Rights Reserved. |
+                  <a
+                    href="https://yourbrandpromoter.com/"
+                    target="_blank"
+                    style="color: #007bff; text-decoration: none"
+                  >
+                    yourbrandpromoter
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Whatsapp Button -->
+    <div class="Whatsupbuttn">
+      <a
+        href="https://api.whatsapp.com/send?phone=917827650882"
+        target="_blank"
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png"
+          alt="WhatsApp"
+          style="height: 60px"
+        />
+      </a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div id="return-to-top"><i class="bi bi-arrow-up"></i></div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+      $(document).ready(function () {
+        // Navbar scroll effect
+        $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+            $(".navbar").addClass("scrolled");
+          } else {
+            $(".navbar").removeClass("scrolled");
+          }
+
+          // Back to top button
+          if ($(this).scrollTop() >= 200) {
+            $("#return-to-top").fadeIn(200);
+          } else {
+            $("#return-to-top").fadeOut(200);
+          }
+        });
+
+        // Back to top
+        $("#return-to-top").click(function () {
+          $("body,html").animate(
+            {
+              scrollTop: 0,
+            },
+            500
+          );
+        });
+
+        // Ensure the product cards open reliably
+        document.querySelectorAll('.product-card-link').forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            if (href) {
+              window.location.href = href;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
